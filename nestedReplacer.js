@@ -6,7 +6,7 @@ const objectSchema = {
             anotherProp: 'c'
         }
     },
-    field4: 'gachi'
+    field4: 'foo'
 };
 
 const arraySchema = [
@@ -17,7 +17,7 @@ const arraySchema = [
             anotherProp: 'c'
         }
     },
-    'gachi'
+    'foo'
 ];
 
 const input = {
