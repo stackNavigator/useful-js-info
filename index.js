@@ -1,4 +1,4 @@
-const schema = {
+const objectSchema = {
     field1: 'a',
     field2: 'b',
     field3: {
@@ -9,22 +9,33 @@ const schema = {
     field4: 'gachi'
 };
 
+const arraySchema = [
+    'a',
+    'b',
+    {
+        myProp: {
+            anotherProp: 'c'
+        }
+    },
+    'gachi'
+];
+
 const input = {
     a: 4,
     b: 6,
     c: 11
 };
 
-const drochTask = (schema, input, result) => {
+const drochTask = (schema, input) => {
     for (prop in schema) {
         if (typeof schema[prop] === 'object') {
-            drochTask(schema[prop], input, result);
+            drochTask(schema[prop], input);
         }
         else {
-            result.push(input[schema[prop]] ? input[schema[prop]] : schema[prop]);
+            schema[prop] = input[schema[prop]] ? input[schema[prop]] : schema[prop];
         }
     }
-    return result;
+    return schema;
 };
  
-console.log(drochTask(schema, input, []));
+console.log(drochTask(arraySchema, input));
