@@ -8,7 +8,7 @@ const objectSchema = {
     },
     field4: 'gachi'
 };
-//helloWorld
+
 const arraySchema = [
     'a',
     'b',
