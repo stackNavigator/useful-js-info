@@ -26,10 +26,10 @@ const input = {
     c: 11
 };
 
-const drochTask = (schema, input) => {
+const nestedReplacer = (schema, input) => {
     for (prop in schema) {
         if (typeof schema[prop] === 'object') {
-            drochTask(schema[prop], input);
+            nestedReplacer(schema[prop], input);
         }
         else {
             schema[prop] = input[schema[prop]] ? input[schema[prop]] : schema[prop];
@@ -38,4 +38,4 @@ const drochTask = (schema, input) => {
     return schema;
 };
  
-console.log(drochTask(arraySchema, input));
+console.log(nestedReplacer(objectSchema, input));
