@@ -24,7 +24,7 @@ const NestedPropertyDeleter = (obj, path) => {
             recursiveDeletion(obj[name][index], steps, i + 1);
         }
         else if (i < steps.length - 1) {
-                recursiveDeletion(obj[name], steps, i + 1);
+            recursiveDeletion(obj[name], steps, i + 1);
         }       
         else if (index) {
             delete obj[name][index];
