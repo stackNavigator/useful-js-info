@@ -14,6 +14,3 @@ const JSONParcer = () => {
 const obj = {
     prop: 'val'
 }
-
-const parcer = JSONParcer();
-console.log(parcer.parse(JSON.stringify(obj)));
