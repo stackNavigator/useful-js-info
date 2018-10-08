@@ -1,6 +1,6 @@
 const input = ['name', 'Alex', 'surname', 'Roflov', 'access', 'admin', 'age', '101']
 
-const generateQueryString = (input) => {
+const generateObjectFromPropNextToValue = (input) => {
   const keys = input.filter((_, i) => {
     return i % 2 === 0
   })
@@ -14,4 +14,4 @@ const generateQueryString = (input) => {
   }
 }
 
-console.log(generateQueryString(input))
+console.log(generateObjectFromPropNextToValue(input))

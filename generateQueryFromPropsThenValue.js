@@ -1,6 +1,6 @@
 const input = ['name', 'surname', 'access', 'age', 'Alex', 'Roflov', 'admin', '101']
 
-const generateQueryString = (input) => {
+const generateQueryFromPropsThenValues = (input) => {
   const middle = input.length / 2
   const keys = input.slice(0, middle)
   const values = input.slice(middle, input.length)
@@ -14,4 +14,4 @@ const generateQueryString = (input) => {
   }
 }
 
-console.log(generateQueryString(input))
+console.log(generateQueryFromPropsThenValues(input))
