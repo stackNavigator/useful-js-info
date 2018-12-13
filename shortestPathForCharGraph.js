@@ -1,22 +1,18 @@
-const input = ['A-B','A-C','B-C','C-D','D-F']
+const input = ['B-D','A-B','B-C','D-F','C-E']
 
 const shortestPathForCharGraph = (graph) => {
-  let fromNode = graph[0].split('-')[0]
-  let toNode = graph[0].split('-')[1]
-  let path = fromNode
-
-  for (let edge of graph) {
-    const nodes = edge.split('-')
-    if (nodes[0] === fromNode && nodes[1] > toNode) {
-      toNode = nodes[1]
-    }
-    else if (nodes[0] !== fromNode) {
-      path += `-${toNode}`
-      fromNode = toNode 
-    }
+  let minPoint = graph[0].split('-')[0]
+  let maxPoint = graph[0].split('-')[1]
+  
+  for (let i = 1; i < graph.length; i++) {
+    const node = graph[i].split('-')
+    const points = node[0] < node[1] ? [node[0], node[1]] : [node[1], node[0]]
+    
+    minPoint = points[0] < minPoint ? points[0] : minPoint
+    maxPoint = points[1] > maxPoint ? points[1] : maxPoint
   }
-
-  return `${path}-${graph[graph.length - 1].split('-')[1]}`
+  
+  
 }
 
 console.log(shortestPathForCharGraph(input))
