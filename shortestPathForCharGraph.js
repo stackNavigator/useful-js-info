@@ -11,8 +11,6 @@ const shortestPathForCharGraph = (graph) => {
     minPoint = points[0] < minPoint ? points[0] : minPoint
     maxPoint = points[1] > maxPoint ? points[1] : maxPoint
   }
-  
-  
 }
 
 console.log(shortestPathForCharGraph(input))

@@ -7,4 +7,4 @@ const convertNumberToBinary = (string) => {
   return output.join('')
 }
 
-console.log(convertNumberToBinary('Alex'))
+console.log(['a', 'b', 'c', ['1', '2']].flat())
