@@ -1,3 +1,27 @@
+const sampleGraph = {
+  'start': [ 'a', 'b' ],
+  'a': [ 'finish' ],
+  'b': [ 'finish' ],
+  'finish': []
+}
+
+const selectionSort = arr => {
+  const sortedArr = []
+  const arrLength = arr.length
+  for (let i = 0; i < arrLength; i++) {
+    let smallest = arr[0]
+    let currentIndex = 0
+    arr.forEach((item, i) => {
+      if (item < smallest) {
+        smallest = item
+        currentIndex = i
+      }
+    })
+    sortedArr.push(...arr.splice(currentIndex, 1))
+  }
+  return sortedArr
+}
+
 const mergeSort = arr => {
   if (arr.length === 1)
     return arr
@@ -39,17 +63,42 @@ const binarySearch = (arr, value, i = 0, j = arr.length - 1) => {
     return binarySearch(arr, value, i, mid)
 }
 
-const test = (total, value) => {
-  const arr = []
-  for (let i = 0; i < total; i++) {
-    arr.push(Math.floor(Math.random() * total) - total / 2)
-  }
-  const start = new Date()
-  const sortedArray = mergeSort(arr)
-  const index = binarySearch(sortedArray, value)
-  console.log(`Index of ${value} is : ${index}`)
-  const end = new Date()
-  console.log(`It took ${(end - start) / 1000} seconds.`)
+const quicksort = arr => {
+  if (arr.length < 2)
+    return arr
+  const pivot = arr.shift()
+  const left = arr.filter(el => el <= pivot)
+  const right = arr.filter(el => el > pivot)
+  return quicksort(left) + pivot + quicksort(right)
 }
 
-test(1000000, 42)
+const breadthFirst = (graph, node) => {
+  const nodes = [ ...graph[node] ]
+  const searched = []
+  while (nodes.length) {
+    const item = nodes.shift()
+    if (searched.includes(item))
+      continue
+    if (item === 'finish')
+      return `Item ${item} was successfully found on this way: ${searched.join(' -> ')}`
+    nodes.push(...graph[item])
+    searched.push(item)
+  }
+  return `Requested item was not found!`
+}
+
+const dijkstra = graph => {
+  
+}
+
+const test = (total) => {
+  const arr = []
+  for (let i = 0; i < total; i++)
+    arr.push(1 + Math.floor(Math.random() * total))
+  const start = new Date()
+  console.log(breadthFirst(sampleGraph, 'start'))
+  const end = new Date()
+  console.log(`It took ${(end - start)} milliseconds.`)
+}
+
+test(10000)
