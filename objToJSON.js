@@ -1,12 +1,17 @@
 const convertToJSON = payload => {
-  const jsonPayload = payload.map(item => {
-    const jsonObj = {}
-    for (let prop in item) {
-      jsonObj[`"${prop}"`] = `${item[prop]}`
-    }
-    return jsonObj
-  })
-  return jsonPayload
+  return payload.map(value => 
+    Object.keys(value).reduce((acc, key) => 
+    ({ ...acc, [`"${key}"`]: `${value[key]}`}), {}))
 }
 
-console.log(convertToJSON())
+console.log(convertToJSON([
+  {
+    prop1: 'value1',
+    prop2: 'value2'
+  },
+  {
+    prop3: 'value3',
+    prop4: 'value4'
+  }
+]
+))
