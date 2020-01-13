@@ -1,25 +1,69 @@
 const sampleGraph = {
-  'start': [ 'a', 'b' ],
-  'a': [ 'finish' ],
-  'b': [ 'finish' ],
+  'start': ['a', 'b'],
+  'a': ['finish'],
+  'b': ['finish'],
   'finish': []
 }
 
-const selectionSort = arr => {
-  const sortedArr = []
-  const arrLength = arr.length
-  for (let i = 0; i < arrLength; i++) {
-    let smallest = arr[0]
-    let currentIndex = 0
-    arr.forEach((item, i) => {
-      if (item < smallest) {
-        smallest = item
-        currentIndex = i
+const bubbleSort = (arr, swapped = true, lastIndex = arr.length - 1) => {
+  while (swapped) {
+    swapped = false
+    for (let i = 0; i < lastIndex; i++) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+        swapped = true
       }
-    })
-    sortedArr.push(...arr.splice(currentIndex, 1))
+    }
+    lastIndex--
   }
-  return sortedArr
+  return arr
+}
+
+const insertionSort = arr => {
+  for (let i = 1; i < arr.length; i++) {
+    let currentElement = arr[i]
+    let j = i - 1
+    while (j >= 0 && arr[j] > currentElement) {
+      arr[j + 1] = arr[j]
+      j--
+    }
+    arr[j + 1] = currentElement
+  }
+  return arr
+}
+
+const quickSort = (arr, low = 0, hi = arr.length - 1) => {
+  if (hi - low > 10) {
+    const pivot = arr[Math.floor(Math.random() * (hi - low) + low)]
+    let left = low
+    let right = hi
+    while (right >= left) {
+      while (arr[right] > pivot)
+        right--
+      while (arr[left] < pivot)
+        left++
+      if (right < left)
+        break
+      [arr[left], arr[right]] = [arr[right], arr[left]]
+      left++
+      right--
+    }
+    quickSort(arr, low, left)
+    quickSort(arr, left + 1, hi)
+  }
+  return insertionSort(arr, hi - low)
+}
+
+const binarySearch = (arr, value, i = 0, j = arr.length - 1) => {
+  if (j - i === 0)
+    throw new Error('Value was not found!')
+  const mid = Math.floor((i + j) / 2)
+  if (arr[mid] === value)
+    return mid
+  if (arr[mid] < value)
+    return binarySearch(arr, value, mid + 1, j)
+  if (arr[mid] > value)
+    return binarySearch(arr, value, i, mid)
 }
 
 const mergeSort = arr => {
@@ -42,38 +86,17 @@ const mergeSort = arr => {
         j++
       }
     }
-    return [ ...result, ...leftArr.slice(i), ...rightArr.slice(j) ]
+    return [...result, ...leftArr.slice(i), ...rightArr.slice(j)]
   }
 
   return merge(
     mergeSort(arr.slice(0, mid)),
     mergeSort(arr.slice(mid))
-    )
-}
-
-const binarySearch = (arr, value, i = 0, j = arr.length - 1) => {
-  const mid = Math.floor((i + j) / 2)
-  if (arr[mid] === value)
-    return mid
-  if (j - i === 0)
-    return -1
-  if (arr[mid] < value)
-    return binarySearch(arr, value, mid + 1, j)
-  if (arr[mid] > value)
-    return binarySearch(arr, value, i, mid)
-}
-
-const quicksort = arr => {
-  if (arr.length < 2)
-    return arr
-  const pivot = arr.shift()
-  const left = arr.filter(el => el <= pivot)
-  const right = arr.filter(el => el > pivot)
-  return quicksort(left) + pivot + quicksort(right)
+  )
 }
 
 const breadthFirst = (graph, node) => {
-  const nodes = [ ...graph[node] ]
+  const nodes = [...graph[node]]
   const searched = []
   while (nodes.length) {
     const item = nodes.shift()
@@ -87,18 +110,15 @@ const breadthFirst = (graph, node) => {
   return `Requested item was not found!`
 }
 
-const dijkstra = graph => {
-  
-}
-
 const test = (total) => {
   const arr = []
   for (let i = 0; i < total; i++)
-    arr.push(1 + Math.floor(Math.random() * total))
+    arr.push(Math.floor(Math.random() * total) + 1)
   const start = new Date()
-  console.log(breadthFirst(sampleGraph, 'start'))
+  console.log(arr)
+  console.log(quickSort(arr))
   const end = new Date()
   console.log(`It took ${(end - start)} milliseconds.`)
 }
 
-test(10000)
+test(1e+1)
