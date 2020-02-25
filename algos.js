@@ -51,7 +51,7 @@ const quickSort = (arr, low = 0, hi = arr.length - 1) => {
     quickSort(arr, low, left)
     quickSort(arr, left + 1, hi)
   }
-  return insertionSort(arr, hi - low)
+  return insertionSort(arr)
 }
 
 const binarySearch = (arr, value, i = 0, j = arr.length - 1) => {
