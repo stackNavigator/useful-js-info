@@ -1,5 +1,3 @@
-const flatNumberWithoutFunction = (number) => {
-  return ~~number;
-}
+const flatNumberWithoutFunction = number => ~~number
 
 console.log(flatNumberWithoutFunction(2.3))

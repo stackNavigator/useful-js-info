@@ -1,8 +1,8 @@
-const convertToJSON = payload => {
-  return payload.map(value => 
-    Object.keys(value).reduce((acc, key) => 
-    ({ ...acc, [`"${key}"`]: `${value[key]}`}), {}))
-}
+const convertToJSON = payload => payload.map(value => Object.keys(value).reduce((acc, key) => ({
+  ...acc,
+  [`"${key}"`]: `${value[key]}`
+}), {}))
+
 
 console.log(convertToJSON([
   {

@@ -92,9 +92,9 @@ const arrayToList = (arr) => {
       value: arr[0],
       rest: null
     }
-  return { 
-    value: arr.shift(), 
-    rest: arrayToList(arr) 
+  return {
+    value: arr.shift(),
+    rest: arrayToList(arr)
   }
 }
 
@@ -129,7 +129,7 @@ const deepEqual = (a, b) => {
   return a === b ? true : false
 }
 
-const flatten = arr => arr.reduce((acc, array) => [ ...acc, ...array], [])
+const flatten = arr => arr.reduce((acc, array) => [...acc, ...array], [])
 
 const loop = (index, test, update, body) => {
   while (test(index)) {
@@ -154,11 +154,11 @@ class Vec {
     this.y = y
   }
 
-  plus({x, y}) {
+  plus({ x, y }) {
     return new Vec(this.x + x, this.y + y)
   }
 
-  minus({x, y}) {
+  minus({ x, y }) {
     return new Vec(this.x - x, this.y - y)
   }
 

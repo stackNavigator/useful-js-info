@@ -5,7 +5,7 @@ const fillWithChars = (inputSys, outputSys, pivotSys) => {
   if (outputSys > pivotSys)
     for (let i = pivotSys; i < outputSys; i++)
       toDict[i] = i + charCodeDiff
-  if (inputSys > pivotSys) 
+  if (inputSys > pivotSys)
     for (let i = pivotSys; i < inputSys; i++)
       fromDict[i + charCodeDiff] = i
   return { fromDict, toDict }
@@ -37,7 +37,7 @@ const castToTargetSys = (value, charDict, targetSys) => {
 const convert = (initVal, fromSys, toSys) => {
   const marginalSys = 10
   const dicts = fillWithChars(fromSys, toSys, marginalSys)
-  if (fromSys !== marginalSys) 
+  if (fromSys !== marginalSys)
     initVal = castToPivotSys(initVal, dicts['fromDict'], fromSys)
   return castToTargetSys(initVal, dicts['toDict'], toSys)
 }

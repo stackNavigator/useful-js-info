@@ -3,12 +3,12 @@ const divideStringByLettersAndNums = (string) => {
   let numbers = ''
   const regex = /[a-zA-Z]/
 
-  for (let char of string) 
-    Number(char) 
-    ? numbers += char 
-    : regex.test(char) 
-      ? letters += char
-      : char
+  for (let char of string)
+    Number(char)
+      ? numbers += char
+      : regex.test(char)
+        ? letters += char
+        : char
 
   return {
     numbers,
