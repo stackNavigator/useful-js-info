@@ -1,6 +1,4 @@
-const areObjectsEqual = (obj1, obj2) => {
-  return Object.keys(obj1).every(key => obj1[key] === obj2[key])
-}
+const areObjectsEqual = (obj1, obj2) => Object.keys(obj1).every(key => obj1[key] === obj2[key])
 
 console.log(areObjectsEqual({
   prop1: 'val1',
