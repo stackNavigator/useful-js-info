@@ -7,4 +7,4 @@ const constructPyramid = (symbol, height) => {
   return result.join('\n')
 }
 
-console.log(constructPyramid('#*', 3))
+console.log(constructPyramid('#', 5))
