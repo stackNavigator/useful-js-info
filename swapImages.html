@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swap Images</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <input id="inner" type="checkbox" />
+    <label for="inner"></label>
+  </div>
+</body>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .wrapper {
+    background-color: brown;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #inner {
+    display: none;
+  }
+
+  #inner+label::before {
+    content: url('http://lorempixel.com/100/100')
+  }
+
+  #inner:checked+label::before {
+    content: url('http://lorempixel.com/50/50')
+  }
+</style>
+
+</html>
