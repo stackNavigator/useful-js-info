@@ -1,19 +1,17 @@
-function taskFunction(x) {
-  const result = {
-    '11': 3
-  }
-  if (x) {
-    result[11] = 2
-  }
-  if (x === false) {
-    result[11] = 4
-  }
-  result[x] = 2
-
-  let sum = 0
-  for (let field in result) {
-    sum += result[field]
-  }
-
-  return sum
+const encodeChars = string => {
+  let result = ''
+  let prevChar = ''
+  let charCount = 1
+  for (let char of string)
+    if (char === prevChar)
+      charCount++
+    else {
+      result += `${charCount !== 1 ? charCount : ''}${char}`
+      prevChar = char
+      charCount = 1
+    }
+  result += charCount
+  return result
 }
+
+console.log(encodeChars('HRRGGBBBB'))
