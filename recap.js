@@ -1,15 +1,16 @@
-const buildRandomArray = (count, min, max) => {
+const buildRandomArray = (length, minValue, maxValue) => {
   const result = []
-  for (let i = 0; i < count; i++)
-    result.push(Math.floor(Math.random() * (max - min)) + min)
+  for (let i = 0; i < length; i++)
+    result.push(Math.floor(Math.random() * (maxValue - minValue)) + minValue)
   return result
 }
 
 const bubbleSort = arr => {
-  let swapped = true
+  let lastIndex = arr.length
+  let swapped
   do {
     swapped = false
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < lastIndex; i++) {
       if (arr[i] > arr[i + 1]) {
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
         swapped = true
@@ -21,8 +22,8 @@ const bubbleSort = arr => {
 
 const insertionSort = arr => {
   for (let i = 1; i < arr.length; i++) {
-    let currentElement = arr[i]
     let j = i - 1
+    const currentElement = arr[i]
     while (j >= 0 && arr[j] > currentElement) {
       arr[j + 1] = arr[j]
       j--
@@ -32,10 +33,10 @@ const insertionSort = arr => {
   return arr
 }
 
-const quickSort = (arr, firstIndex = 0, lastIndex = arr.length - 1) => {
-  const pivot = arr[Math.floor(Math.random() * (lastIndex - firstIndex + 1)) + firstIndex]
-  let i = firstIndex
-  let j = lastIndex
+const quickSort = (arr, leftBoundary = 0, rightBoundary = arr.length - 1) => {
+  const pivot = arr[Math.floor(Math.random() * (rightBoundary - leftBoundary + 1)) + leftBoundary]
+  let i = leftBoundary
+  let j = rightBoundary
   while (i <= j) {
     while (arr[i] < pivot)
       i++
@@ -47,26 +48,40 @@ const quickSort = (arr, firstIndex = 0, lastIndex = arr.length - 1) => {
       j--
     }
   }
-  if (firstIndex < j)
-    quickSort(arr, firstIndex, j)
-  if (i < lastIndex)
-    quickSort(arr, i, lastIndex)
+  if (leftBoundary < j)
+    quickSort(arr, leftBoundary, j)
+  if (i < rightBoundary)
+    quickSort(arr, i, rightBoundary)
   return arr
 }
 
-const binarySearch = (arr, value, firstIndex = 0, lastIndex = arr.length - 1) => {
-  if (firstIndex > lastIndex)
-    return `${value} was not found in given array.`
-  const pivotIndex = Math.floor((firstIndex + lastIndex) / 2)
-  if (arr[pivotIndex] === value)
-    return `${value} was found on ${pivotIndex} index.`
-  if (arr[pivotIndex] < value)
-    return binarySearch(arr, value, pivotIndex + 1, lastIndex)
-  if (arr[pivotIndex] > value)
-    return binarySearch(arr, value, firstIndex, pivotIndex - 1)
+const binarySearch = (arr, value, leftBoundary = 0, rightBoundary = arr.length - 1) => {
+  if (rightBoundary - leftBoundary === -1)
+    return `${value} is not present in given array.`
+  const mid = Math.floor((leftBoundary + rightBoundary) / 2)
+  if (value === arr[mid])
+    return `${value} was found at index ${mid}.`
+  if (value < arr[mid])
+    return binarySearch(arr, value, leftBoundary, mid - 1)
+  if (value > arr[mid])
+    return binarySearch(arr, value, mid + 1, rightBoundary)
 }
 
-const testArray = buildRandomArray(10, -5, 100)
-const sortedArray = quickSort(testArray)
-console.log(sortedArray)
-console.log(binarySearch(sortedArray, 50))
+const throttle = (delay, func) => {
+  let elapsedTime = 0
+  return () => {
+    if (Date.now() - elapsedTime < delay)
+      return
+    elapsedTime = Date.now()
+    func()
+  }
+}
+
+const debounce = (delay, func) => {
+  let timerId = null
+  return () => {
+    if (timerId)
+      clearTimeout(timerId)
+    timerId = setTimeout(func, delay)
+  }
+}
